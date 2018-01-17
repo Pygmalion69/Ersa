@@ -19,7 +19,6 @@ package eu.sergehelfrich.ersa;
 import eu.sergehelfrich.ersa.solver.Solver;
 import eu.sergehelfrich.ersa.solver.SolverException;
 import eu.sergehelfrich.ersa.solver.FunctionCallable;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
