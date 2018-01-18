@@ -22,3 +22,21 @@ dependencies {
     compile 'com.github.Pygmalion69:Ersa:0.1'
 }
 ```
+
+### Example
+
+```java
+Temperature temperature = new Temperature(20, Scale.CELSIUS);
+Temperature dewPoint = new Temperature(Scale.CELSIUS);
+double relativeHumidity = 60;
+
+Dew dew = new Dew();
+
+double kelvin = temperature.getKelvin();
+dewPoint.setKelvin(dew.dewPoint(relativeHumidity, kelvin));
+double dewPointC = dewPoint.getTemperature();
+```
+
+### Demo
+
+A demo is included in the project.
