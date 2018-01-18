@@ -40,3 +40,6 @@ double dewPointC = dewPoint.getTemperature();
 ### Demo
 
 A demo is included in the project.
+
+![Dew Point Demo](screenshot_demo.png "Dew Point Demo")
+

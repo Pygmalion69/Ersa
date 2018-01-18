@@ -48,9 +48,9 @@ public class ErsaDemo extends Application {
 
     private static final double DEFAULT_TEMPERATURE = 20;
 
-    Temperature temperature = new Temperature(DEFAULT_TEMPERATURE, Scale.CELSIUS);
+    private Temperature temperature = new Temperature(DEFAULT_TEMPERATURE, Scale.CELSIUS);
 
-    Temperature dewPoint = new Temperature(Scale.CELSIUS);
+    private Temperature dewPoint = new Temperature(Scale.CELSIUS);
 
     private final ToggleGroup scaleGroup = new ToggleGroup();
 
