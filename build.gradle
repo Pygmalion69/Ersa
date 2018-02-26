@@ -3,9 +3,17 @@ apply plugin: 'java'
 sourceCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
+/* include to build a demo
 if (!hasProperty('mainClass')) {
     ext.mainClass = 'eu.sergehelfrich.ersa.demo.ErsaDemo'
 }
+*/
+
+/* Comment out to build a demo */
+jar {
+    exclude('eu/sergehelfrich/ersa/demo/**')   
+}
+/**/
 
 repositories {
     mavenCentral()
