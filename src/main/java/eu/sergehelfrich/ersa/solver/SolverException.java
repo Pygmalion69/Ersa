@@ -23,7 +23,7 @@ package eu.sergehelfrich.ersa.solver;
 public class SolverException extends Exception {
 
     /**
-     *
+     * 
      * @param message message
      */
     public SolverException(String message) {

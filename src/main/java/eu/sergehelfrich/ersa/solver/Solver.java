@@ -35,14 +35,13 @@ public class Solver {
     public double solve(FunctionCallable functionCallable, double y, double x0) throws SolverException, IllegalArgumentException {
 
         double x = x0;
-        double xNew = 100 * x; // just make it big
+        double xNew;
         double maxCount = 10;
         double count = 0;
         while (true) {
             if (count > maxCount) {
                 throw new SolverException("Solver does not converge!");
             }
-
             double dx = x / 1000.0;
             double z = functionCallable.function(x);
             xNew = x + dx * (y - z) / (functionCallable.function(x + dx) - z);
@@ -51,7 +50,6 @@ public class Solver {
             }
             x = xNew;
             count++;
-
         }
     }
 }

@@ -23,12 +23,11 @@ package eu.sergehelfrich.ersa.solver;
 public interface FunctionCallable {
     
     /**
-     *
+     * 
      * @param x x
      * @return y y
      * @throws eu.sergehelfrich.ersa.solver.SolverException Solver doe not converge
      */
     public double function(double x) throws SolverException;
-   
-    
+       
 }

@@ -31,24 +31,17 @@ import java.util.logging.Logger;
  */
 public class Dew {
 
-    //private final FunctionCallable pvsCallable = new PvsCallable();
     private final Solver solver = new Solver();
 
     /**
-     * Compute dewPoint for given relative humidity[%] and temperature[K].
+     * Compute the dew point for given relative humidity[%] and temperature[K].
      * @param relativeHumidity relative humidity (%)
      * @param temperature temperature (K)
      * @return dew point (K)
      * @throws eu.sergehelfrich.ersa.solver.SolverException Solver does not converge
      */
-    public double dewPoint(double relativeHumidity, double temperature) throws SolverException, IllegalArgumentException {
-        return calculate(new FunctionCallable() {
-            @Override
-            public double function(double x) throws SolverException, IllegalArgumentException {
-                return pvs(x);
-            }
-        }, relativeHumidity, temperature);
-
+    public double dewPoint(double relativeHumidity, double temperature) throws SolverException, IllegalArgumentException {        
+        return solver.solve((double x) -> pvs(x), relativeHumidity / 100.0 * pvs(temperature), temperature);
     }
 
     private double calculate(FunctionCallable functionCallable, double relativeHumidity, double temperature) throws SolverException {
