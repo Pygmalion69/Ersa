@@ -19,6 +19,7 @@ package eu.sergehelfrich.ersa.demo;
 import eu.sergehelfrich.ersa.Dew;
 import eu.sergehelfrich.ersa.Scale;
 import eu.sergehelfrich.ersa.Temperature;
+import eu.sergehelfrich.ersa.preservation.Metrics;
 import eu.sergehelfrich.ersa.solver.SolverException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,6 +66,8 @@ public class ErsaDemo extends Application {
     private final Label dewPointLabel = new Label();
 
     private final Dew dew = new Dew();
+    
+    private final Metrics metrics = new Metrics();
 
     private boolean listen = true;
 
@@ -188,6 +191,7 @@ public class ErsaDemo extends Application {
             Logger.getLogger(ErsaDemo.class.getName()).log(Level.WARNING, null, ex);
 
         }
+        //System.out.println("Mold:" + Metrics.mold(temperature, humidity));
 
     }
 
