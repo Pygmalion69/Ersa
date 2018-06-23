@@ -33,6 +33,8 @@ import org.junit.runners.Parameterized.Parameters;
 @RunWith(Parameterized.class)
 public class DewTest {
 
+    private static Dew dew;
+
     @Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
@@ -52,10 +54,12 @@ public class DewTest {
 
     @BeforeClass
     public static void setUpClass() {
+        dew = new Dew();
     }
 
     @AfterClass
     public static void tearDownClass() {
+        dew = null;
     }
 
     /**
@@ -64,7 +68,6 @@ public class DewTest {
     @Test
     public void testDewPoint() throws Exception {
         System.out.println("dewPoint");
-        Dew dew = new Dew();
         assertEquals(expectedDewPoint, dew.dewPoint(relativeHumidity, temperature), .05);
     }
 
@@ -74,7 +77,6 @@ public class DewTest {
     @Test
     public void testPvs() {
         System.out.println("pvs");
-        Dew dew = new Dew();
         assertEquals(611, dew.pvs(273.15), 5);
     }
 
@@ -84,7 +86,6 @@ public class DewTest {
     @Test
     public void testPvsIce() {
         System.out.println("pvsIce");
-        Dew dew = new Dew();
         assertEquals(260, dew.pvsIce(263.15), 5);
     }
 
@@ -94,7 +95,6 @@ public class DewTest {
     @Test
     public void testPvsWater() {
         System.out.println("pvsWater");
-        Dew dew = new Dew();
         assertEquals(1228, dew.pvsWater(283.15), 5);
         assertEquals(2339, dew.pvsWater(293.15), 5);
     }
