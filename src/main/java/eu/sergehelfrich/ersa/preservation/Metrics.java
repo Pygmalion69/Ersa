@@ -153,4 +153,44 @@ public class Metrics {
         return emc(temperature.getTemperature(), relativeHumidity);
     }
 
+    /**
+     * Mold risk
+     *
+     * @param moldValue
+     * @return
+     */
+    public Risk moldRisk(int moldValue) {
+        return moldValue == 0 ? Risk.GOOD : Risk.RISK;
+    }
+
+    /**
+     * Natural aging (chemical decay)
+     *
+     * @param preservationIndex
+     * @return
+     */
+    public Risk naturalAging(int preservationIndex) {
+        return preservationIndex < 45 ? Risk.RISK : preservationIndex >= 75 ? Risk.GOOD : Risk.OK;
+    }
+
+    /**
+     * Mechanical damage (definition?)
+     *
+     * @param emc
+     * @return
+     */
+    public Risk mechanicalDamage(float emc) {
+        return emc < 5 || emc > 12.5 ? Risk.RISK : Risk.OK;
+    }
+
+    /**
+     * Metal corrosion
+     *
+     * @param emc
+     * @return
+     */
+    public Risk metalCorrosion(float emc) {
+        return emc < 7.0 ? Risk.GOOD : emc > 10.5 ? Risk.RISK : Risk.OK;
+    }
+
 }

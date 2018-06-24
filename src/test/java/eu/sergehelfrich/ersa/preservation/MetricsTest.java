@@ -127,5 +127,89 @@ public class MetricsTest {
         float result = instance.emc(temperature, relativeHumidity);
         assertEquals(expResult, result, 0.0);      
     }
+
+    /**
+     * Test of moldRisk method, of class Metrics.
+     */
+    @Test
+    public void testMoldRisk() {
+        System.out.println("moldRisk");
+        int moldValue = 0;
+        Risk expResult = Risk.GOOD;
+        Risk result = metrics.moldRisk(moldValue);
+        assertEquals(expResult, result);
+        
+        moldValue = 3;
+        expResult = Risk.RISK;
+        result = metrics.moldRisk(moldValue);
+        assertEquals(expResult, result);      
+    }
+
+    /**
+     * Test of naturalAging method, of class Metrics.
+     */
+    @Test
+    public void testNaturalAging() {
+        System.out.println("naturalAging");
+        int preservationIndex = 10;
+        Risk expResult = Risk.RISK;
+        Risk result = metrics.naturalAging(preservationIndex);
+        assertEquals(expResult, result);
+        
+        preservationIndex = 60;
+        expResult = Risk.OK;
+        result = metrics.naturalAging(preservationIndex);
+        assertEquals(expResult, result);
+        
+        preservationIndex = 80;
+        expResult = Risk.GOOD;
+        result = metrics.naturalAging(preservationIndex);
+        assertEquals(expResult, result); 
+    }
+
+    /**
+     * Test of mechanicalDamage method, of class Metrics.
+     */
+    @Test
+    public void testMechanicalDamage() {
+        System.out.println("mechanicalDamage");
+        float emc = 15F;
+        Risk expResult = Risk.RISK;
+        Risk result = metrics.mechanicalDamage(emc);
+        assertEquals(expResult, result);
+        
+        emc = 8F;
+        expResult = Risk.OK;
+        result = metrics.mechanicalDamage(emc);
+        assertEquals(expResult, result);
+        
+        emc = 3F;
+        expResult = Risk.RISK;
+        result = metrics.mechanicalDamage(emc);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of metalCorrosion method, of class Metrics.
+     */
+    @Test
+    public void testMetalCorrosion() {
+        System.out.println("metalCorrosion");
+        float emc = 5F;
+        Risk expResult = Risk.GOOD;
+        Risk result = metrics.metalCorrosion(emc);
+        assertEquals(expResult, result);
+      
+        emc = 8F;
+        expResult = Risk.OK;
+        result = metrics.metalCorrosion(emc);
+        assertEquals(expResult, result);
+        
+        emc = 15F;
+        expResult = Risk.RISK;
+        result = metrics.metalCorrosion(emc);
+        assertEquals(expResult, result);
+    }
+    
     
 }
