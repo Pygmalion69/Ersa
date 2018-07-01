@@ -52,9 +52,8 @@ public class MetricsTest {
         System.out.println("preservationIndex");
         double temperature = 6.38;
         double relativeHumidity = 62.84;
-        Metrics instance = new Metrics();
         int expResult = 184;
-        int result = instance.preservationIndex(temperature, relativeHumidity);
+        int result = metrics.preservationIndex(temperature, relativeHumidity);
         assertEquals(expResult, result);
     }
 
@@ -66,9 +65,8 @@ public class MetricsTest {
         System.out.println("preservationIndex");
         Temperature temperature = new Temperature(6.38, Scale.CELSIUS);
         double relativeHumidity = 62.84;
-        Metrics instance = new Metrics();
         int expResult = 184;
-        int result = instance.preservationIndex(temperature, relativeHumidity);
+        int result = metrics.preservationIndex(temperature, relativeHumidity);
         assertEquals(expResult, result);
     }
 
@@ -80,9 +78,20 @@ public class MetricsTest {
         System.out.println("mold");
         double temperature = 5.08;
         double relativeHumidity = 62.84;
-        Metrics instance = new Metrics();
         int expResult = 0;
-        int result = instance.mold(temperature, relativeHumidity);
+        int result = metrics.mold(temperature, relativeHumidity);
+        assertEquals(expResult, result);
+        
+        temperature = 9.31;
+        relativeHumidity = 100;
+        expResult = 3;
+        result = metrics.mold(temperature, relativeHumidity);
+        assertEquals(expResult, result);
+        
+        temperature = 44;
+        relativeHumidity = 100;
+        expResult = 4;
+        result = metrics.mold(temperature, relativeHumidity);
         assertEquals(expResult, result);
     }
 
@@ -94,9 +103,8 @@ public class MetricsTest {
         System.out.println("mold");
         Temperature temperature = new Temperature(5.08, Scale.CELSIUS);
         double relativeHumidity = 62.84;
-        Metrics instance = new Metrics();
         int expResult = 0;
-        int result = instance.mold(temperature, relativeHumidity);
+        int result = metrics.mold(temperature, relativeHumidity);
         assertEquals(expResult, result);
     }
 
@@ -108,9 +116,8 @@ public class MetricsTest {
         System.out.println("emc");
         double temperature = 31.78;
         double relativeHumidity = 62.84;
-        Metrics instance = new Metrics();
         float expResult = 11.1F;
-        float result = instance.emc(temperature, relativeHumidity);
+        float result = metrics.emc(temperature, relativeHumidity);
         assertEquals(expResult, result, 0.0);      
     }
 
@@ -122,9 +129,8 @@ public class MetricsTest {
         System.out.println("emc");
         Temperature temperature = new Temperature(31.78, Scale.CELSIUS);
         double relativeHumidity = 62.84;
-        Metrics instance = new Metrics();
         float expResult = 11.1F;
-        float result = instance.emc(temperature, relativeHumidity);
+        float result = metrics.emc(temperature, relativeHumidity);
         assertEquals(expResult, result, 0.0);      
     }
 
@@ -210,6 +216,5 @@ public class MetricsTest {
         result = metrics.metalCorrosion(emc);
         assertEquals(expResult, result);
     }
-    
-    
+       
 }
