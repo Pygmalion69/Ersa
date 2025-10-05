@@ -86,7 +86,7 @@ public class Metrics {
      *
      * @param temperature deg. Celsius
      * @param relativeHumidity %
-     * @return PI
+     * @return Preservation Index (PI) score for the provided conditions
      */
     public int preservationIndex(double temperature, double relativeHumidity) {
         return piTable[((temperature < -23 ? -23 : temperature > 65 ? 65 : (int) Math.round(temperature)) + 23) * 90 + (relativeHumidity < 6L ? 6 : relativeHumidity > 95 ? 95 : (int) Math.round(relativeHumidity)) - 6];
@@ -97,7 +97,7 @@ public class Metrics {
      *
      * @param temperature deg. C
      * @param relativeHumidity %
-     * @return PI
+     * @return Preservation Index (PI) score for the provided conditions
      * @see eu.sergehelfrich.ersa.Temperature
      */
     public int preservationIndex(Temperature temperature, double relativeHumidity) {
@@ -110,7 +110,8 @@ public class Metrics {
      *
      * @param temperature deg. C
      * @param relativeHumidity %
-     * @return
+     * @return Mold risk score where {@code 0} means no risk and higher values
+     * indicate a faster onset of mold growth
      */
     public int mold(double temperature, double relativeHumidity) {
         if (temperature > 45 || temperature < 2 || relativeHumidity < 65) {
@@ -124,7 +125,8 @@ public class Metrics {
      *
      * @param temperature deg. C
      * @param relativeHumidity %
-     * @return
+     * @return Mold risk score where {@code 0} means no risk and higher values
+     * indicate a faster onset of mold growth
      */
     public int mold(Temperature temperature, double relativeHumidity) {
         temperature.setScale(Scale.CELSIUS);
@@ -136,7 +138,7 @@ public class Metrics {
      *
      * @param temperature deg. C
      * @param relativeHumidity %
-     * @return
+     * @return Equilibrium moisture content in percent
      */
     public float emc(double temperature, double relativeHumidity) {
         return emcTable[(Math.max(-20, Math.min(65, (int) Math.round(temperature))) + 20) * 101 + (int) Math.round(relativeHumidity)];
@@ -147,7 +149,7 @@ public class Metrics {
      *
      * @param temperature
      * @param relativeHumidity %
-     * @return
+     * @return Equilibrium moisture content in percent
      */
     public float emc(Temperature temperature, double relativeHumidity) {
         temperature.setScale(Scale.CELSIUS);
@@ -157,8 +159,8 @@ public class Metrics {
     /**
      * Mold risk
      *
-     * @param moldValue
-     * @return
+     * @param moldValue mold score as returned by {@link #mold(double, double)}
+     * @return Qualitative risk classification for mold growth
      */
     public Risk moldRisk(int moldValue) {
         return moldValue == 0 ? Risk.GOOD : Risk.RISK;
@@ -167,8 +169,8 @@ public class Metrics {
     /**
      * Natural aging (chemical decay)
      *
-     * @param preservationIndex
-     * @return
+     * @param preservationIndex Preservation Index score
+     * @return Qualitative risk classification for natural aging
      */
     public Risk naturalAging(int preservationIndex) {
         return preservationIndex < 45 ? Risk.RISK : preservationIndex >= 75 ? Risk.GOOD : Risk.OK;
@@ -177,8 +179,8 @@ public class Metrics {
     /**
      * Mechanical damage (definition?)
      *
-     * @param emc
-     * @return
+     * @param emc equilibrium moisture content in percent
+     * @return Qualitative risk classification for mechanical damage
      */
     public Risk mechanicalDamage(float emc) {
         return emc < 5 || emc > 12.5 ? Risk.RISK : Risk.OK;
@@ -187,8 +189,8 @@ public class Metrics {
     /**
      * Metal corrosion
      *
-     * @param emc
-     * @return
+     * @param emc equilibrium moisture content in percent
+     * @return Qualitative risk classification for metal corrosion
      */
     public Risk metalCorrosion(float emc) {
         return emc < 7.0 ? Risk.GOOD : emc > 10.5 ? Risk.RISK : Risk.OK;
