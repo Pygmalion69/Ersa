@@ -6,7 +6,7 @@ Understanding how environmental conditions affect the longevity of museum, archi
 
 ### Fundamentals
 
-The **Preservation Index (PI)** and the **Time‑Weighted Preservation Index (TWPI)** were first introduced in 1995 to evaluate the preservation potential of different environments【2】.  They extend earlier “isoperm” work by applying chemical‑kinetics principles to storage data.  The PI estimates the expected lifetime (in years) of a typical “preservation‑problem” object—acidic wood‑pulp paper, colour photographs, nitrate film, tapes, etc.—under a constant temperature and relative‑humidity pairing【q】.  It uses the Arrhenius equation to relate temperature to the rate of hydrolysis and chain‑scission reactions【2】.  A benchmark PI of **50 years** at 20 °C/45 % RH was chosen so that a typical unstable object expected to deteriorate in 50 years at room conditions will have PI = 50 in that environment【1】.  Higher PI values indicate slower chemical decay, and the PI for cellulose triacetate film (activation energy ~92 kJ mol⁻¹) is used as a proxy for many other organic materials【2】.
+The **Preservation Index (PI)** and the **Time‑Weighted Preservation Index (TWPI)** were first introduced in 1995 to evaluate the preservation potential of different environments【2】.  They extend earlier “isoperm” work by applying chemical‑kinetics principles to storage data.  The PI estimates the expected lifetime (in years) of a typical “preservation‑problem” object—acidic wood‑pulp paper, colour photographs, nitrate film, tapes, etc.—under a constant temperature and relative‑humidity pairing【1】.  It uses the Arrhenius equation to relate temperature to the rate of hydrolysis and chain‑scission reactions【2】.  A benchmark PI of **50 years** at 20 °C/45 % RH was chosen so that a typical unstable object expected to deteriorate in 50 years at room conditions will have PI = 50 in that environment【1】.  Higher PI values indicate slower chemical decay, and the PI for cellulose triacetate film (activation energy ~92 kJ mol⁻¹) is used as a proxy for many other organic materials【2】.
 
 The **Time‑Weighted Preservation Index (TWPI)** incorporates the fact that real environments fluctuate.  Instead of simply averaging PI values, TWPI weights each time interval by the reciprocal of the PI value, giving greater influence to periods of higher degradation rates【2】.  Temperature data are smoothed using a 24‑hour moving average and relative humidity using a 30‑day moving average to approximate how real objects equilibrate【1】.  The result is a single TWPI value representing the cumulative preservation quality over the analysed period; higher values correspond to longer expected lifetimes.  Institutions should ideally compute TWPI over at least a full year to capture seasonal effects【2】.
 
@@ -60,7 +60,7 @@ Low MinEMC values (<5 %) suggest the environment is excessively dry, while high
 
 ### Maximum Equilibrium Moisture Content (MaxEMC) for Metals
 
-Metal objects are susceptible to corrosion when moisture levels are high.  Because modelling the combined effects of temperature and humidity on corrosion is complex, IPI uses the MaxEMC as a proxy【715220739897236†L356-L367】.  They recommend the following thresholds for interpreting MaxEMC【1】:
+Metal objects are susceptible to corrosion when moisture levels are high.  Because modelling the combined effects of temperature and humidity on corrosion is complex, IPI uses the MaxEMC as a proxy【1】.  They recommend the following thresholds for interpreting MaxEMC【1】:
 
 | MaxEMC | Interpretation |
 |-------:|:--------------|
