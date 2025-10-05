@@ -49,9 +49,9 @@ public class ErsaDemo extends Application {
 
     private static final double DEFAULT_TEMPERATURE = 20;
 
-    private Temperature temperature = new Temperature(DEFAULT_TEMPERATURE, Scale.CELSIUS);
+    private final Temperature temperature = new Temperature(DEFAULT_TEMPERATURE, Scale.CELSIUS);
 
-    private Temperature dewPoint = new Temperature(Scale.CELSIUS);
+    private final Temperature dewPoint = new Temperature(Scale.CELSIUS);
 
     private final ToggleGroup scaleGroup = new ToggleGroup();
 
@@ -71,26 +71,22 @@ public class ErsaDemo extends Application {
 
     private boolean listen = true;
 
-    ChangeListener<Toggle> scaleChangeListener = new ChangeListener<Toggle>() {
+    ChangeListener<Toggle> scaleChangeListener = (ov, old_toggle, new_toggle) -> {
 
-        public void changed(ObservableValue<? extends Toggle> ov,
-                Toggle old_toggle, Toggle new_toggle) {
-
-            if (scaleGroup.getSelectedToggle() != null) {
-                listen = false;
-                synchronized (ErsaDemo.this) {
-                    temperature.setTemperature(temperatureSlider.getValue());
-                    Scale scale = (Scale) scaleGroup.getSelectedToggle().getUserData();
-                    temperature.setScale(scale);
-                    temperatureSlider.setMin(temperature.getMIN());
-                    temperatureSlider.setMax(temperature.getMAX());
-                    temperatureSlider.setValue(oneDecimal(temperature.getTemperature()));
-                    updateDewPoint();
-                }
-                listen = true;
+        if (scaleGroup.getSelectedToggle() != null) {
+            listen = false;
+            synchronized (ErsaDemo.this) {
+                temperature.setTemperature(temperatureSlider.getValue());
+                Scale scale = (Scale) scaleGroup.getSelectedToggle().getUserData();
+                temperature.setScale(scale);
+                temperatureSlider.setMin(temperature.getMIN());
+                temperatureSlider.setMax(temperature.getMAX());
+                temperatureSlider.setValue(oneDecimal(temperature.getTemperature()));
+                updateDewPoint();
             }
-
+            listen = true;
         }
+
     };
 
     /**
@@ -101,7 +97,7 @@ public class ErsaDemo extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         primaryStage.setTitle("Ersa Demo");
         Pane root = new StackPane();
         VBox vBox = new VBox();
@@ -112,14 +108,14 @@ public class ErsaDemo extends Application {
         temperatureScaleBox.setSpacing(12);
         Label temperatureLabel = new Label("Temperature");
 
-        RadioButton celsiusButton = new RadioButton("\u2103");
+        RadioButton celsiusButton = new RadioButton("℃");
         celsiusButton.setSelected(true);
         celsiusButton.setToggleGroup(scaleGroup);
         celsiusButton.setUserData(Scale.CELSIUS);
-        RadioButton fahrenheitButton = new RadioButton("\u2109");
+        RadioButton fahrenheitButton = new RadioButton("℉");
         fahrenheitButton.setToggleGroup(scaleGroup);
         fahrenheitButton.setUserData(Scale.FAHRENHEIT);
-        RadioButton kelvinButton = new RadioButton("\u212a");
+        RadioButton kelvinButton = new RadioButton("K");
         kelvinButton.setToggleGroup(scaleGroup);
         kelvinButton.setUserData(Scale.KELVIN);
 

@@ -89,7 +89,6 @@ public class MetricsTest {
         assertEquals(expResult, result);
         
         temperature = 44;
-        relativeHumidity = 100;
         expResult = 4;
         result = metrics.mold(temperature, relativeHumidity);
         assertEquals(expResult, result);

@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,9 +32,10 @@ import java.util.logging.Logger;
  * Preservation Metrics
  *
  * @see
- * <a href="https://www.imagepermanenceinstitute.org/environmental/research/preservation-metrics">Preservation
+ * <a href="https://s3.cad.rit.edu/ipi-assets/publications/understanding_preservation_metrics.pdf">Preservation
  * Metrics</a>
- * @see New Tools for Preservation: Assessing Long-Term Environmental Effects on
+ * <a href="https://www.rit.edu/ipi/sites/rit.edu.ipi/files/documents/an_introduction_to_the_ipi_preservation_metrics.pdf">Introduction to the IPI Preservation Metrics</a>
+ * Ref. New Tools for Preservation: Assessing Long-Term Environmental Effects on
  * Library and Archives Collections. Published by The Commission on Preservation
  * and Access, 1995.
  * @author helfrich
@@ -44,6 +46,7 @@ public class Metrics {
      * Preservation Index
      */
     private int[] piTable;
+
     /**
      * Equilibrium Moisture Content
      */
@@ -58,13 +61,11 @@ public class Metrics {
             InputStream isPi = getClass().getClassLoader().getResourceAsStream("pi.json");
             InputStream isEmc = getClass().getClassLoader().getResourceAsStream("emc.json");
             Gson gson = new Gson();
-            piReader = new InputStreamReader(isPi, "UTF-8");
-            piTable = new Gson().fromJson(piReader, int[].class);
-            emcReader = new InputStreamReader(isEmc, "UTF-8");
-            emcTable = new Gson().fromJson(emcReader, float[].class);
+            piReader = new InputStreamReader(isPi, StandardCharsets.UTF_8);
+            piTable = gson.fromJson(piReader, int[].class);
+            emcReader = new InputStreamReader(isEmc, StandardCharsets.UTF_8);
+            emcTable = gson.fromJson(emcReader, float[].class);
 
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Metrics.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (piReader != null) {
@@ -88,13 +89,13 @@ public class Metrics {
      * @return PI
      */
     public int preservationIndex(double temperature, double relativeHumidity) {
-        return piTable[((temperature < -23 ? -23 : temperature > 65 ? 65 : (int) Math.round(temperature)) + 23) * 90 + (relativeHumidity < 6l ? 6 : relativeHumidity > 95 ? 95 : (int) Math.round(relativeHumidity)) - 6];
+        return piTable[((temperature < -23 ? -23 : temperature > 65 ? 65 : (int) Math.round(temperature)) + 23) * 90 + (relativeHumidity < 6L ? 6 : relativeHumidity > 95 ? 95 : (int) Math.round(relativeHumidity)) - 6];
     }
 
     /**
      * Preservation Index
      *
-     * @param temperature
+     * @param temperature deg. C
      * @param relativeHumidity %
      * @return PI
      * @see eu.sergehelfrich.ersa.Temperature
@@ -121,7 +122,7 @@ public class Metrics {
     /**
      * Mold Risk
      *
-     * @param temperature
+     * @param temperature deg. C
      * @param relativeHumidity %
      * @return
      */

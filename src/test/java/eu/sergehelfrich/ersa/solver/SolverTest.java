@@ -49,7 +49,7 @@ public class SolverTest {
     public void testSolve() throws Exception {
         System.out.println("solve");
         double result = solver.solve((double x) -> f(x), 6, 5);
-        assertEquals(result, 2, 0.001);
+        assertEquals(2, result, 0.001);
     }
     
     double f(double x) {

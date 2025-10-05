@@ -13,8 +13,6 @@ javafx {
     modules = [ 'javafx.controls' ]
 }
 
-/* include to build a demo */
-
 if (!hasProperty('mainClass')) {
     ext.mainClass = 'eu.sergehelfrich.ersa.demo.ErsaDemo'
 }
