@@ -19,7 +19,6 @@ package eu.sergehelfrich.ersa;
 import eu.sergehelfrich.ersa.solver.Solver;
 import eu.sergehelfrich.ersa.solver.SolverException;
 import eu.sergehelfrich.ersa.solver.FunctionCallable;
-import java.util.logging.Logger;
 
 /**
  * Dew point calculator. Based on the approach by Wolfgang Kuehn in JavaScript.
@@ -41,7 +40,7 @@ public class Dew {
      * @throws eu.sergehelfrich.ersa.solver.SolverException Solver does not converge
      */
     public double dewPoint(double relativeHumidity, double temperature) throws SolverException, IllegalArgumentException {        
-        return solver.solve((double x) -> pvs(x), relativeHumidity / 100.0 * pvs(temperature), temperature);
+        return solver.solve(this::pvs, relativeHumidity / 100.0 * pvs(temperature), temperature);
     }
 
     private double calculate(FunctionCallable functionCallable, double relativeHumidity, double temperature) throws SolverException {
@@ -115,7 +114,7 @@ public class Dew {
      * Thermodynamic Properties of Water and Steam by IAPWS (International
      * Association for the Properties of Water and Steam), Erlangen, Germany,
      * September 1997.
-     *
+     * <p>
      * This is Equation (30) in Section 8.1 "The Saturation-Pressure Equation
      * (Basic Equation)"
      *

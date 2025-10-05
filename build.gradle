@@ -13,8 +13,6 @@ javafx {
     modules = [ 'javafx.controls' ]
 }
 
-/* include to build a demo */
-
 if (!hasProperty('mainClass')) {
     ext.mainClass = 'eu.sergehelfrich.ersa.demo.ErsaDemo'
 }
@@ -24,9 +22,27 @@ mainClassName = 'eu.sergehelfrich.ersa.demo.ErsaDemo'
 
 
 
-/* Comment out to build a demo */
-jar {
-    exclude('eu/sergehelfrich/ersa/demo/**')   
+tasks.named('jar') {
+    exclude('eu/sergehelfrich/ersa/demo/**')
+    description = 'Assembles the library JAR without the demo sources.'
+}
+
+tasks.register('demoJar', Jar) {
+    group = 'build'
+    description = 'Assembles an executable JAR that contains the demo application.'
+    archiveClassifier = 'demo'
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    dependsOn tasks.named('classes')
+
+    from sourceSets.main.output
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
 
 test {
