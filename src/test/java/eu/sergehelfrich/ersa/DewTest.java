@@ -63,7 +63,7 @@ public class DewTest {
     }
 
     /**
-     * Test of expectedDewPoint method, of class Dew.
+     * Test of the {@link Dew#dewPoint(double, double)} method.
      */
     @Test
     public void testDewPoint() throws Exception {
