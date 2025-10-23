@@ -39,7 +39,14 @@ public class Dew {
      * @return dew point (K)
      * @throws eu.sergehelfrich.ersa.solver.SolverException Solver does not converge
      */
-    public double dewPoint(double relativeHumidity, double temperature) throws SolverException, IllegalArgumentException {        
+    public double dewPoint(double relativeHumidity, double temperature) throws SolverException, IllegalArgumentException {
+        if (relativeHumidity < 0 || relativeHumidity > 100) {
+            throw new IllegalArgumentException("Relative humidity must be between 0 and 100 inclusive.");
+        }
+        if (temperature < Temperature.MIN || temperature > Temperature.MAX) {
+            throw new IllegalArgumentException(String.format(
+                    "Temperature must be between %d K and %d K inclusive.", Temperature.MIN, Temperature.MAX));
+        }
         return solver.solve(this::pvs, relativeHumidity / 100.0 * pvs(temperature), temperature);
     }
 
