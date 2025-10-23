@@ -26,7 +26,7 @@ public interface FunctionCallable {
      * 
      * @param x x
      * @return y y
-     * @throws eu.sergehelfrich.ersa.solver.SolverException Solver doe not converge
+     * @throws eu.sergehelfrich.ersa.solver.SolverException Solver does not converge.
      */
     public double function(double x) throws SolverException;
        
