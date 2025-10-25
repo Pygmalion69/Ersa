@@ -18,7 +18,7 @@ Add the dependency:
 
 ```
 dependencies {
-    compile 'com.github.Pygmalion69:Ersa:0.4.2'
+    compile 'com.github.Pygmalion69:Ersa:0.4.3'
 }
 ```
 
