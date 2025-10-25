@@ -18,7 +18,9 @@ package eu.sergehelfrich.ersa.solver;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import static org.junit.Assert.*;
 
 /**
@@ -28,6 +30,9 @@ import static org.junit.Assert.*;
 public class SolverTest {
 
     private static Solver solver;
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
     
     public SolverTest() {
     }
@@ -50,6 +55,20 @@ public class SolverTest {
         System.out.println("solve");
         double result = solver.solve((double x) -> f(x), 6, 5);
         assertEquals(2, result, 0.001);
+    }
+
+    @Test
+    public void testSolveConvergesFromNegativeInitialGuess() throws Exception {
+        double result = solver.solve(this::f, 6, -5);
+        assertEquals(-2, result, 0.001);
+    }
+
+    @Test
+    public void testSolveFlatFunctionThrowsSolverException() throws Exception {
+        expectedException.expect(SolverException.class);
+        expectedException.expectMessage("Solver does not converge!");
+
+        solver.solve(x -> 1.0, 2, 1);
     }
     
     double f(double x) {

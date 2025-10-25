@@ -63,12 +63,42 @@ public class DewTest {
     }
 
     /**
-     * Test of expectedDewPoint method, of class Dew.
+     * Test of the {@link Dew#dewPoint(double, double)} method.
      */
     @Test
     public void testDewPoint() throws Exception {
         System.out.println("dewPoint");
         assertEquals(expectedDewPoint, dew.dewPoint(relativeHumidity, temperature), .05);
+    }
+
+    @Test
+    public void dewPointRejectsRelativeHumidityBelowZero() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> dew.dewPoint(-0.1, Temperature.CELSIUS_OFFSET));
+        assertEquals("Relative humidity must be between 0 and 100 inclusive.", exception.getMessage());
+    }
+
+    @Test
+    public void dewPointRejectsRelativeHumidityAboveHundred() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> dew.dewPoint(100.1, Temperature.CELSIUS_OFFSET));
+        assertEquals("Relative humidity must be between 0 and 100 inclusive.", exception.getMessage());
+    }
+
+    @Test
+    public void dewPointRejectsTemperatureBelowMinimum() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> dew.dewPoint(50, Temperature.MIN - 1));
+        assertEquals("Temperature must be between " + Temperature.MIN + " K and " + Temperature.MAX + " K inclusive.",
+                exception.getMessage());
+    }
+
+    @Test
+    public void dewPointRejectsTemperatureAboveMaximum() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> dew.dewPoint(50, Temperature.MAX + 1));
+        assertEquals("Temperature must be between " + Temperature.MIN + " K and " + Temperature.MAX + " K inclusive.",
+                exception.getMessage());
     }
 
     /**
