@@ -9,7 +9,7 @@ sourceCompatibility = '11'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 javafx {
-    version = "20"
+    version = "11.0.2"
     modules = [ 'javafx.controls' ]
 }
 

@@ -1,8 +1,7 @@
 # Ersa
 Dew point calculation library
 
-[![Release](https://jitpack.io/v/Pygmalion69/Ersa.svg)](https://jitpack.io/#Pygmalion69/Ersa) [![Build Status](https://travis-ci.org/Pygmalion69/Ersa.svg?branch=master)](https://travis-ci.org/Pygmalion69/Ersa)
-
+[![Release](https://jitpack.io/v/Pygmalion69/Ersa.svg)](https://jitpack.io/#Pygmalion69/Ersa)
 ### Gradle
 
 Add the JitPack repository in your root build.gradle at the end of repositories:
